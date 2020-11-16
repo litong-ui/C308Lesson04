@@ -7,6 +7,7 @@
  */
 
 import React from 'react';
+import moment from 'moment-timezone';
 import {
   SafeAreaView,
   StyleSheet,
@@ -23,8 +24,59 @@ import {
   DebugInstructions,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-
+//ex1
+const Welcome = () => {
+  return <Text>Welcome to C308 Web Frameworks!</Text>;
+};
+//ex2
+class MyFirstApp extends React.Component {
+  render() {
+    return <Text>My first React Native app</Text>;
+  }
+}
+//ex3
+const SemModule = (props) => {
+  return (
+    <Text>
+      {props.day} - {props.module}
+    </Text>
+  );
+};
+//ex4
+class Eats extends React.Component {
+  render() {
+    return (
+      <Text>
+        {this.props.name} {'\n'} {this.props.location} {'\n'}
+      </Text>
+    );
+  }
+}
+//ex6
+class Clock extends React.Component {
+  render() {
+    let city = this.props.name;
+    var time = moment().tz(city).format('HH mm Z');
+    return (
+      <Text>
+        {city} - {time}
+      </Text>
+    );
+  }
+}
+const WorldClock = () => {
+  return (
+    <View>
+      <Clock name="Asia/Singapore" />
+      <Clock name="Europe/London" />
+      <Clock name="America/New_York" />
+      <Clock name="Europe/Oslo" />
+    </View>
+  );
+};
 const App: () => React$Node = () => {
+  //ex5
+  console.log('Listing semester modules and recommended eats');
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -39,32 +91,21 @@ const App: () => React$Node = () => {
             </View>
           )}
           <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Step One</Text>
-              <Text style={styles.sectionDescription}>
-                Edit <Text style={styles.highlight}>App.js</Text> to change this
-                screen and then come back to see your edits.
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>See Your Changes</Text>
-              <Text style={styles.sectionDescription}>
-                <ReloadInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Debug</Text>
-              <Text style={styles.sectionDescription}>
-                <DebugInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Learn More</Text>
-              <Text style={styles.sectionDescription}>
-                Read the docs to discover what to do next:
-              </Text>
-            </View>
-            <LearnMoreLinks />
+            <View style={styles.sectionContainer} />
+            <Welcome />
+            <MyFirstApp />
+            <Text> </Text>
+            <SemModule day={'Monday'} module={'C348'} />
+            <SemModule day={'Tuesday'} module={'C273'} />
+            <SemModule day={'Friday'} module={'C308'} />
+            <Text> </Text>
+            <Text>Recommended Eats @RP</Text>
+            <Eats name="Sweet Tooth Waffles" location="W6 Level 1, E-canteen" />
+            <Eats name="Crowded Bowl" location="W4/W6 Lawn Canteen" />
+            <Eats name="Western Cuisine @Koufu" location="E1 Level 1, Koufu" />
+            <Eats name="Ayam Penyet" location="W4/W6 Lawn Canteen" />
+            <Text>World Clock</Text>
+            <WorldClock />
           </View>
         </ScrollView>
       </SafeAreaView>
